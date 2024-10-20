@@ -37,24 +37,26 @@ class ChattingBox extends StatelessWidget {
               padding: const EdgeInsets.only(right: 8.0),
               child: icon!,
             ),
-          Container(
-            constraints: const BoxConstraints(maxWidth: 440),
-            padding:
-                const EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
-            decoration: BoxDecoration(
-              color: isMine ? ColorTable.greyTransparent : Colors.transparent,
-              borderRadius: BorderRadius.circular(18.0),
-              border: Border.all(
-                width: 1.0,
-                color: isMine ? Colors.transparent : ColorTable.grey,
+          Flexible(
+            child: Container(
+              constraints: const BoxConstraints(maxWidth: 440),
+              padding:
+                  const EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
+              decoration: BoxDecoration(
+                color: isMine ? ColorTable.greyTransparent : Colors.transparent,
+                borderRadius: BorderRadius.circular(18.0),
+                border: Border.all(
+                  width: 1.0,
+                  color: isMine ? Colors.transparent : ColorTable.grey,
+                ),
               ),
-            ),
-            child: Text(
-              message,
-              style: const TextStyle(
-                fontSize: 15.0,
-                height: 1.25,
-                color: Colors.white,
+              child: Text(
+                message,
+                style: const TextStyle(
+                  fontSize: 15.0,
+                  height: 1.25,
+                  color: Colors.white,
+                ),
               ),
             ),
           ),

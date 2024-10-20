@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'dart:convert';
 
+import 'package:avarium_avatar_creator/providers/secret_value_provider.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:avarium_avatar_creator/common/service_const.dart';
 import 'package:avarium_avatar_creator/common/utils.dart';
@@ -71,10 +72,19 @@ class AvatarCreationStateNotifier extends StateNotifier<AvatarCreationModel?> {
 
   Future<void> startSession(AvatarCreationRequestModel requestModel) async {
     state = await avatarRepository.startNewAvatarCreationSession(requestModel);
+    final accessToken = await ref
+        .read(secretValueProvider("access_token").notifier)
+        .fetchIfNull();
+    if (accessToken == null) {
+      Utils.showErrorToast(message: 'invalid access token');
+      return;
+    }
     // Websocket connection -> GET /avatar/create/{id}/enter/
     _channel = WebSocketChannel.connect(
       Uri.parse('$wsOrigin/avatar/create/${state?.id}/enter/'),
     );
+    _channel!.sink.add(jsonEncode({'access_token': accessToken}));
+    Utils.d('access token sent');
     // receive data from server
     _channel!.stream.listen(_handleEvent);
   }
@@ -260,7 +270,7 @@ class AvatarObjectCreationChatStateNotifier
 
   void addChunk(String chunk) {
     if (_messageController == null) {
-      _messageController = StreamController<String>();
+      _messageController = StreamController<String>.broadcast();
       currentMessage = '';
       state = [...state];
     }

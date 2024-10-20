@@ -464,7 +464,7 @@ class _AvatarCreationScreenState extends ConsumerState<AvatarCreationScreen>
   }
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext cmontext) {
     final AvatarCreationModel? avatarCreation =
         ref.watch(avatarCreationProvider);
     String? imageUrl = avatarCreation?.imageUrl;

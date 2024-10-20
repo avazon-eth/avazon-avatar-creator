@@ -22,8 +22,8 @@ class AvatarCreationChatModel {
   @JsonKey(name: 'content')
   String content;
 
-  @JsonKey(name: 'object_created_number')
-  int objectCreatedNumber; // current number of objects created
+  @JsonKey(name: 'created_object_number')
+  int createdObjectNumber; // current number of objects created
 
   @JsonKey(name: 'tool_call_id')
   String toolCallId;
@@ -41,7 +41,7 @@ class AvatarCreationChatModel {
     required this.objectType,
     required this.createdAt,
     required this.content,
-    required this.objectCreatedNumber,
+    required this.createdObjectNumber,
     required this.toolCallId,
     required this.toolCallName,
     required this.toolCallArguments,
