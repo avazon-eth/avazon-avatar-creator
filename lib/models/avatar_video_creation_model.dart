@@ -8,11 +8,10 @@ class AvatarVideoCreationModel {
   final String id;
   @JsonKey(name: 'avatar_id')
   final String avatarId;
-  final String title;
-  @JsonKey(name: 'thumbnail_url')
-  final String? thumbnailUrl;
-  @JsonKey(name: 'video_url')
-  final String? videoUrl;
+  @JsonKey(name: 'thumbnail_image_url')
+  final String? thumbnailImageUrl;
+  @JsonKey(name: 'content_url')
+  final String? contentUrl;
   @JsonKey(name: 'created_at')
   final DateTime createdAt;
   final AvatarContentCreationStatus status;
@@ -22,9 +21,8 @@ class AvatarVideoCreationModel {
   AvatarVideoCreationModel({
     required this.id,
     required this.avatarId,
-    required this.title,
-    this.thumbnailUrl,
-    this.videoUrl,
+    this.thumbnailImageUrl,
+    this.contentUrl,
     required this.createdAt,
     required this.status,
     this.failedReason,

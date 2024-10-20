@@ -2,6 +2,8 @@ import 'dart:async';
 
 import 'package:avarium_avatar_creator/components/layout.dart';
 import 'package:avarium_avatar_creator/components/primary_button.dart';
+import 'package:avarium_avatar_creator/providers/web_data_session_provider.dart';
+import 'package:avarium_avatar_creator/screens/avatar_video_creation_screen.dart';
 import 'package:awesome_dialog/awesome_dialog.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -57,14 +59,15 @@ class _AvatarUseVideoWithImageScreenState
     final videoCreation = ref.watch(avatarVideoCreateProvider(
       Pair(widget.avatarId, widget.videoCreationId),
     ));
-    bool imageGenerated = videoCreation?.thumbnailUrl != null;
+    bool imageGenerated = videoCreation?.thumbnailImageUrl != null;
     var deviceSize = MediaQuery.of(context).size;
     return AvatarLayout(
       avatar: Stack(
         children: [
           Center(
             child: AvatarCard(
-              imageUrl: videoCreation?.thumbnailUrl ?? avatar?.profileImageUrl,
+              imageUrl:
+                  videoCreation?.thumbnailImageUrl ?? avatar?.profileImageUrl,
             ),
           ),
           if (!imageGenerated)
@@ -192,6 +195,10 @@ class _AvatarUseVideoWithImageScreenState
                       if (!imageGenerated) {
                         Utils.showToast('Waiting for image generation');
                         return;
+                      } else {
+                        ref
+                            .read(webTokenProvider.notifier)
+                            .putData(widget.videoCreationId);
                       }
                     },
                   ),

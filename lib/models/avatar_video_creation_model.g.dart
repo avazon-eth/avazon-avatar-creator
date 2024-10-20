@@ -11,9 +11,8 @@ AvatarVideoCreationModel _$AvatarVideoCreationModelFromJson(
     AvatarVideoCreationModel(
       id: json['id'] as String,
       avatarId: json['avatar_id'] as String,
-      title: json['title'] as String,
-      thumbnailUrl: json['thumbnail_url'] as String?,
-      videoUrl: json['video_url'] as String?,
+      thumbnailImageUrl: json['thumbnail_image_url'] as String?,
+      contentUrl: json['content_url'] as String?,
       createdAt: DateTime.parse(json['created_at'] as String),
       status: $enumDecode(_$AvatarContentCreationStatusEnumMap, json['status']),
       failedReason: json['failed_reason'] as String?,
@@ -24,9 +23,8 @@ Map<String, dynamic> _$AvatarVideoCreationModelToJson(
     <String, dynamic>{
       'id': instance.id,
       'avatar_id': instance.avatarId,
-      'title': instance.title,
-      'thumbnail_url': instance.thumbnailUrl,
-      'video_url': instance.videoUrl,
+      'thumbnail_image_url': instance.thumbnailImageUrl,
+      'content_url': instance.contentUrl,
       'created_at': instance.createdAt.toIso8601String(),
       'status': _$AvatarContentCreationStatusEnumMap[instance.status]!,
       'failed_reason': instance.failedReason,

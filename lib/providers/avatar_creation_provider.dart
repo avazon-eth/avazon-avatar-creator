@@ -72,7 +72,7 @@ class AvatarCreationStateNotifier extends StateNotifier<AvatarCreationModel?> {
 
   Future<void> startSession(AvatarCreationRequestModel requestModel) async {
     state = await avatarRepository.startNewAvatarCreationSession(requestModel);
-    final accessToken = await ref
+    String? accessToken = await ref
         .read(secretValueProvider("access_token").notifier)
         .fetchIfNull();
     if (accessToken == null) {
@@ -83,8 +83,10 @@ class AvatarCreationStateNotifier extends StateNotifier<AvatarCreationModel?> {
     _channel = WebSocketChannel.connect(
       Uri.parse('$wsOrigin/avatar/create/${state?.id}/enter/'),
     );
+
+    accessToken = accessToken.replaceAll('"', '').replaceAll('\\', '');
     _channel!.sink.add(jsonEncode({'access_token': accessToken}));
-    Utils.d('access token sent');
+    Utils.d('access token sent $accessToken');
     // receive data from server
     _channel!.stream.listen(_handleEvent);
   }

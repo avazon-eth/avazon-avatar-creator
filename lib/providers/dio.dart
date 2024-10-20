@@ -32,7 +32,7 @@ class CustomInterceptor extends Interceptor {
       Utils.d('accessToken inserted');
       var s = "Bearer $accessToken";
       s = s.replaceAll('"', '').replaceAll('\\', '');
-      Utils.d('accessToken = $s');
+      // Utils.d('accessToken = $s');
       options.headers.addAll({"Authorization": s});
     }
     return super.onRequest(options, handler);

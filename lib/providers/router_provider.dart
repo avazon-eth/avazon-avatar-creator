@@ -8,19 +8,19 @@ final routerProvider = Provider<GoRouter>((ref) {
   return GoRouter(
     routes: [
       GoRoute(
-        path: '/avatar/:avatarId/contents/video/create/:token_key',
+        path: '/avatar/:avatar_id/contents/video/create/start/:token_key',
         name: AvatarCreateVideoScreen.routeName,
         builder: (context, state) => AvatarCreateVideoScreen(
-          avatarId: state.pathParameters['avatarId'] ?? '',
+          avatarId: state.pathParameters['avatar_id'] ?? '',
           tokenKey: state.pathParameters['token_key'] ?? '',
         ),
       ),
       GoRoute(
-        path: '/avatar/:avatarId/contents/video/create/:creationId',
+        path: '/avatar/:avatar_id/contents/video/:creation_id/create',
         name: AvatarCreateVideoWithImageScreen.routeName,
         builder: (context, state) => AvatarCreateVideoWithImageScreen(
-          avatarId: state.pathParameters['avatarId'] ?? '',
-          videoCreationId: state.pathParameters['creationId'] ?? '',
+          avatarId: state.pathParameters['avatar_id'] ?? '',
+          videoCreationId: state.pathParameters['creation_id'] ?? '',
         ),
       ),
       // avatar creation

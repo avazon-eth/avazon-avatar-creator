@@ -5,6 +5,7 @@ import 'package:avarium_avatar_creator/components/secondary_button.dart';
 import 'package:avarium_avatar_creator/components/text_field.dart';
 import 'package:avarium_avatar_creator/models/avatar_video_creation_model.dart';
 import 'package:avarium_avatar_creator/providers/avatar_detail_provider.dart';
+import 'package:avarium_avatar_creator/providers/web_data_session_provider.dart';
 import 'package:avarium_avatar_creator/screens/avatar_video_with_image_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
@@ -35,6 +36,19 @@ class AvatarCreateVideoScreen extends ConsumerStatefulWidget {
 class _AvatarUseVideoScreenState
     extends ConsumerState<AvatarCreateVideoScreen> {
   final descriptionController = TextEditingController();
+
+  @override
+  void initState() {
+    super.initState();
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      if (widget.tokenKey.isEmpty) {
+        Utils.showErrorToast(message: 'Error occurred. Invalid access token.');
+      } else {
+        Utils.d('token_key: ${widget.tokenKey}');
+        ref.read(webTokenProvider.notifier).initWith(widget.tokenKey);
+      }
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -139,7 +153,7 @@ class _AvatarUseVideoScreenState
                                 ),
                                 avatarId: widget.avatarId);
                         if (context.mounted) {
-                          context.goNamed(
+                          context.pushNamed(
                             AvatarCreateVideoWithImageScreen.routeName,
                             pathParameters: {
                               'avatar_id': widget.avatarId,
