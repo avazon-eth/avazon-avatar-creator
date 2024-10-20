@@ -1,5 +1,6 @@
 import 'package:avarium_avatar_creator/common/service_const.dart';
 import 'package:avarium_avatar_creator/models/avatar_creation_model.dart';
+import 'package:avarium_avatar_creator/models/web_data_session_token_model.dart';
 import 'package:avarium_avatar_creator/providers/dio.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:retrofit/retrofit.dart';
@@ -19,5 +20,10 @@ abstract class AvatarRepository {
   @POST("/avatar/create/new")
   Future<AvatarCreationModel> startNewAvatarCreationSession(
     @Body() AvatarCreationRequestModel requestModel,
+  );
+
+  @PUT("/avatar/create/new")
+  Future<void> putNewAvatarCreationSession(
+    @Body() WebDataSessionPutRequestModel requestModel,
   );
 }

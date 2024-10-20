@@ -1,6 +1,6 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'avatar_repository.dart';
+part of 'web_data_session_repository.dart';
 
 // **************************************************************************
 // RetrofitGenerator
@@ -8,8 +8,8 @@ part of 'avatar_repository.dart';
 
 // ignore_for_file: unnecessary_brace_in_string_interps,no_leading_underscores_for_local_identifiers
 
-class _AvatarRepository implements AvatarRepository {
-  _AvatarRepository(
+class _WebDataSessionRepository implements WebDataSessionRepository {
+  _WebDataSessionRepository(
     this._dio, {
     this.baseUrl,
   }) {
@@ -21,35 +21,38 @@ class _AvatarRepository implements AvatarRepository {
   String? baseUrl;
 
   @override
-  Future<AvatarCreationModel> startNewAvatarCreationSession(
-      requestModel) async {
+  Future<WebDataSessionTokenModel> getToken(requestModel) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
     final _data = <String, dynamic>{};
     _data.addAll(requestModel.toJson());
     final _result = await _dio.fetch<Map<String, dynamic>>(
-        _setStreamType<AvatarCreationModel>(Options(
+        _setStreamType<WebDataSessionTokenModel>(Options(
       method: 'POST',
       headers: _headers,
       extra: _extra,
     )
             .compose(
               _dio.options,
-              '/avatar/create/new',
+              '/web-data-session/token/fetch',
               queryParameters: queryParameters,
               data: _data,
             )
             .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
-    final value = AvatarCreationModel.fromJson(_result.data!);
+    final value = WebDataSessionTokenModel.fromJson(_result.data!);
     return value;
   }
 
   @override
-  Future<void> putNewAvatarCreationSession(requestModel) async {
+  Future<void> putNewAvatarCreationSession(
+    requestModel,
+    accessToken,
+  ) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
-    final _headers = <String, dynamic>{};
+    final _headers = <String, dynamic>{r'Authorization': accessToken};
+    _headers.removeWhere((k, v) => v == null);
     final _data = <String, dynamic>{};
     _data.addAll(requestModel.toJson());
     await _dio.fetch<void>(_setStreamType<void>(Options(
@@ -59,7 +62,7 @@ class _AvatarRepository implements AvatarRepository {
     )
         .compose(
           _dio.options,
-          '/avatar/create/new',
+          '/web-data-session/data',
           queryParameters: queryParameters,
           data: _data,
         )

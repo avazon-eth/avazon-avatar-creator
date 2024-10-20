@@ -9,7 +9,7 @@ final routerProvider = Provider<GoRouter>((ref) {
         path: '/',
         name: AvatarCreationScreen.routeName,
         builder: (context, state) => AvatarCreationScreen(
-          webSessionId: state.pathParameters['session_id'] ?? '',
+          tokenKey: state.uri.queryParameters['token_key'] ?? '',
         ),
       ),
     ],

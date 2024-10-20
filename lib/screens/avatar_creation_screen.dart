@@ -17,6 +17,7 @@ import 'package:avarium_avatar_creator/components/voice_player.dart';
 import 'package:avarium_avatar_creator/models/avatar_creation_chat_model.dart';
 import 'package:avarium_avatar_creator/models/avatar_creation_model.dart';
 import 'package:avarium_avatar_creator/providers/avatar_creation_provider.dart';
+import 'package:avarium_avatar_creator/providers/web_data_session_provider.dart';
 import 'package:awesome_dialog/awesome_dialog.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -43,9 +44,9 @@ class AvatarCreationScreen extends ConsumerStatefulWidget {
   static const routeName = 'avatar-creation';
 
   // used on <iframe/> wrapper. Will be used only once on the first page load.
-  final String webSessionId;
+  final String tokenKey;
 
-  const AvatarCreationScreen({super.key, required this.webSessionId});
+  const AvatarCreationScreen({super.key, required this.tokenKey});
 
   @override
   ConsumerState<AvatarCreationScreen> createState() =>
@@ -439,7 +440,12 @@ class _AvatarCreationScreenState extends ConsumerState<AvatarCreationScreen>
   }
 
   Future<void> createAvatar() async {
-    // TODO : go to license agreement screen
+    final avatarCreation = ref.read(avatarCreationProvider);
+    if (avatarCreation != null && avatarCreation.canCreateNow) {
+      ref.read(webTokenProvider.notifier).putData(avatarCreation.id);
+    } else {
+      Utils.showErrorToast(message: 'Avatar creation is not ready.');
+    }
   }
 
   @override
@@ -447,6 +453,12 @@ class _AvatarCreationScreenState extends ConsumerState<AvatarCreationScreen>
     super.initState();
     _progressTabController = TabController(length: 4, vsync: this);
     WidgetsBinding.instance.addPostFrameCallback((_) {
+      if (widget.tokenKey.isEmpty) {
+        Utils.showErrorToast(message: 'Error occurred. Invalid access token.');
+      } else {
+        Utils.d('token_key: ${widget.tokenKey}');
+        ref.read(webTokenProvider.notifier).initWith(widget.tokenKey);
+      }
       ref.read(avatarCreationProvider.notifier).reset();
     });
   }
