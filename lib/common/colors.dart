@@ -2,7 +2,7 @@ import 'dart:math';
 
 import 'package:flutter/rendering.dart';
 
-abstract class GidColorTable {
+abstract class ColorTable {
   static const primary = Color(0xFF801AE5);
   static const purpleTransparent = Color(0x8C261A33);
   static const purple = Color(0xFF261A33);

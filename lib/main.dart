@@ -1,5 +1,5 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:avarium_avatar_creator/consts/colors.dart';
+import 'package:avarium_avatar_creator/common/colors.dart';
 import 'package:avarium_avatar_creator/providers/router_provider.dart';
 import 'package:flutter/material.dart';
 
@@ -25,7 +25,7 @@ class MyApp extends ConsumerWidget {
       routerConfig: router,
       theme: ThemeData(
         colorScheme: ColorScheme.fromSeed(
-          seedColor: GidColorTable.primary,
+          seedColor: ColorTable.primary,
           brightness: Brightness.dark,
         ),
         fontFamily: 'Poppins',
@@ -93,22 +93,22 @@ class MyApp extends ConsumerWidget {
           ),
         ),
         tabBarTheme: const TabBarTheme(
-          indicatorColor: GidColorTable.white,
+          indicatorColor: ColorTable.white,
           indicatorSize: TabBarIndicatorSize.tab,
-          dividerColor: GidColorTable.greyTransparent,
+          dividerColor: ColorTable.greyTransparent,
           labelStyle: TextStyle(
             fontFamily: 'Poppins',
             fontWeight: FontWeight.w600,
             fontSize: 18,
             height: 1.25,
-            color: GidColorTable.white,
+            color: ColorTable.white,
           ),
-          labelColor: GidColorTable.white,
+          labelColor: ColorTable.white,
           unselectedLabelStyle: TextStyle(
             fontFamily: 'Poppins',
             fontSize: 18,
             height: 1.25,
-            color: GidColorTable.grey,
+            color: ColorTable.grey,
           ),
         ),
         useMaterial3: true,

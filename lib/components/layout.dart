@@ -1,4 +1,4 @@
-import 'package:avarium_avatar_creator/consts/colors.dart';
+import 'package:avarium_avatar_creator/common/colors.dart';
 import 'package:flutter/material.dart';
 
 class AvatarLayout extends StatelessWidget {
@@ -15,7 +15,7 @@ class AvatarLayout extends StatelessWidget {
   Widget build(BuildContext context) {
     bool fold = MediaQuery.of(context).size.width < 768;
     return Scaffold(
-      backgroundColor: GidColorTable.systemBlack3,
+      backgroundColor: ColorTable.systemBlack3,
       body: Column(
         children: [
           if (!fold)
