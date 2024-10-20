@@ -1,3 +1,5 @@
+import 'package:avarium_avatar_creator/components/layout.dart';
+import 'package:avarium_avatar_creator/components/logo_splash.dart';
 import 'package:avarium_avatar_creator/consts/colors.dart';
 import 'package:awesome_dialog/awesome_dialog.dart';
 import 'package:flutter/material.dart';
@@ -23,6 +25,10 @@ class _AvatarCreationScreenState extends ConsumerState<AvatarCreationScreen>
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: GidColorTable.systemBlack3,
+      body: AvatarLayout(
+        avatar: LogoSplash(),
+        panel: Container(),
+      ),
     );
   }
 }
