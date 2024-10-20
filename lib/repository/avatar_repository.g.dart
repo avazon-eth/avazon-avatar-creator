@@ -13,7 +13,7 @@ class _AvatarRepository implements AvatarRepository {
     this._dio, {
     this.baseUrl,
   }) {
-    baseUrl ??= 'http://localhost:8080';
+    baseUrl ??= 'http://13.52.74.27:8080';
   }
 
   final Dio _dio;
