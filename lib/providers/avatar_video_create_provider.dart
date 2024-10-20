@@ -1,8 +1,8 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:gid_app_v2/models/avatar/avatar_video_creation_model.dart';
-import 'package:gid_app_v2/models/common/fair_model.dart';
-import 'package:gid_app_v2/providers/common/abstract_object_provider.dart';
-import 'package:gid_app_v2/repository/avatar_repository.dart';
+import 'package:avarium_avatar_creator/models/avatar_video_creation_model.dart';
+import 'package:avarium_avatar_creator/models/common/fair_model.dart';
+import 'package:avarium_avatar_creator/providers/common/abstract_object_provider.dart';
+import 'package:avarium_avatar_creator/repository/avatar_repository.dart';
 
 final avatarVideoCreateProvider = StateNotifierProviderFamily<
     AvatarVideoCreateStateNotifier,

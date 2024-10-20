@@ -19,10 +19,12 @@ class AvatarCreateVideoScreen extends ConsumerStatefulWidget {
   static const routeName = 'create-avatar-video';
 
   final String avatarId;
+  final String tokenKey;
 
   const AvatarCreateVideoScreen({
     super.key,
     required this.avatarId,
+    required this.tokenKey,
   });
 
   @override

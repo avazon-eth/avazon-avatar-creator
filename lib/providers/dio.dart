@@ -30,7 +30,10 @@ class CustomInterceptor extends Interceptor {
     String? accessToken = await accessTokenAsync;
     if (accessToken != null) {
       Utils.d('accessToken inserted');
-      options.headers.addAll({"Authorization": "Bearer $accessToken"});
+      var s = "Bearer $accessToken";
+      s = s.replaceAll('"', '').replaceAll('\\', '');
+      Utils.d('accessToken = $s');
+      options.headers.addAll({"Authorization": s});
     }
     return super.onRequest(options, handler);
   }
