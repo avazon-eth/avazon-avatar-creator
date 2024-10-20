@@ -6,10 +6,10 @@ final routerProvider = Provider<GoRouter>((ref) {
   return GoRouter(
     routes: [
       GoRoute(
-        path: '/',
+        path: '/:token_key',
         name: AvatarCreationScreen.routeName,
         builder: (context, state) => AvatarCreationScreen(
-          tokenKey: state.uri.queryParameters['token_key'] ?? '',
+          tokenKey: state.pathParameters['token_key'] ?? '',
         ),
       ),
     ],
